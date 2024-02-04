@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 	openGraph: {
 		title: "Onframe This Gorilla Will Die In 1 Day",
 		description: "Onframe This Gorilla Will Die In 1 Day",
-		images: [`${NEXT_PUBLIC_URL}/0.jpeg`],
+		images: [`${NEXT_PUBLIC_URL}/0.png`],
 	},
 	other: {
 		...frameMetadata,
