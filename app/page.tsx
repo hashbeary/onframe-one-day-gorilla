@@ -11,7 +11,7 @@ const frameMetadata = getFrameMetadata({
 			label: "➡️",
 		},
 	],
-	image: `${NEXT_PUBLIC_URL}/0.jpeg`,
+	image: `${NEXT_PUBLIC_URL}/0.png`,
 	post_url: `${NEXT_PUBLIC_URL}/api`,
 });
 
