@@ -1,1 +1,1 @@
-Manga Author: [x.com/sotonami](https://x.com/sotonami)
+The Manga Author: [x.com/sotonami](https://x.com/sotonami)

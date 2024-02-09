@@ -34,8 +34,24 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 	accountAddress = message.interactor.verified_accounts[0];
 
 	let next: number;
-	if (slideNum == 10 && message?.button == 2) next = slideNum;
-	else if (slideNum == 0 && message?.button == 1) next = slideNum;
+
+	// if (slideNum == 10 && message?.button == 2) {
+	// 	return new NextResponse(
+	// 		getFrameHtmlResponse({
+	// 			buttons: [
+	// 				{
+	// 					label: "⬅️",
+	// 				},
+	// 				{
+	// 					label: "➡️",
+	// 				},
+	// 			],
+	// 			image: `${NEXT_PUBLIC_URL}/${next}.png`,
+	// 			post_url: `${NEXT_PUBLIC_URL}/api?slide=` + next,
+	// 		})
+	// 	);
+	// }
+	if (slideNum == 0 && message?.button == 1) next = slideNum;
 	else next = message?.button == 2 ? slideNum + 1 : slideNum - 1;
 
 	return new NextResponse(
