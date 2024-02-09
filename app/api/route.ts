@@ -35,22 +35,24 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
 	let next: number;
 
-	// if (slideNum == 10 && message?.button == 2) {
-	// 	return new NextResponse(
-	// 		getFrameHtmlResponse({
-	// 			buttons: [
-	// 				{
-	// 					label: "⬅️",
-	// 				},
-	// 				{
-	// 					label: "➡️",
-	// 				},
-	// 			],
-	// 			image: `${NEXT_PUBLIC_URL}/${next}.png`,
-	// 			post_url: `${NEXT_PUBLIC_URL}/api?slide=` + next,
-	// 		})
-	// 	);
-	// }
+	if (slideNum == 10 && message?.button == 2) {
+		return new NextResponse(
+			// getFrameHtmlResponse({
+			// 	buttons: [
+			// 		{
+			// 			label: "Mint",
+			// 			action: "mint" as "post" | "post_redirect" | undefined,
+			// 			target:
+			// 		},
+			// 	],
+			// 	image: `${NEXT_PUBLIC_URL}/${next}.png`,
+			// 	post_url: `${NEXT_PUBLIC_URL}/api?slide=` + next,
+			// })
+			`<!DOCTYPE html><html><head><meta property="fc:frame:button:1" content="Mint" />
+			<meta property="fc:frame:button:1:action" content="mint" />
+			<meta property="fc:frame:button:1:target" content="eip155:11155111:0x2026E58bFdaF3eAd9E9a469F479DB0f8F13EFD44<:token_id>"><meta property="fc:frame:image" content=${NEXT_PUBLIC_URL}/error.png" /><meta property="fc:frame" content="vNext" /></head></html>`
+		);
+	}
 	if (slideNum == 0 && message?.button == 1) next = slideNum;
 	else next = message?.button == 2 ? slideNum + 1 : slideNum - 1;
 
