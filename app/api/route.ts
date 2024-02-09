@@ -35,9 +35,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
 	let next: number;
 	if (slideNum == 10 && message?.button == 2) next = slideNum;
-	if (slideNum == 0 && message?.button == 1) next = slideNum;
-
-	next = message?.button == 2 ? slideNum + 1 : slideNum - 1;
+	else if (slideNum == 0 && message?.button == 1) next = slideNum;
+	else next = message?.button == 2 ? slideNum + 1 : slideNum - 1;
 
 	return new NextResponse(
 		getFrameHtmlResponse({
