@@ -34,19 +34,17 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
 	const already_minted = await kv.get("account:" + accountAddress);
 
-	if (already_minted || !accountAddress) {
+	if (already_minted) {
 		return new NextResponse(
 			getFrameHtmlResponse({
 				buttons: [
 					{
-						label: already_minted
-							? "You have already minted it!"
-							: "You have to connect your wallet",
+						label: "You have already minted it!",
 					},
 				],
-				image: `${NEXT_PUBLIC_URL}/nfts/1.jpg`,
+
+				image: { src: `${NEXT_PUBLIC_URL}/nfts/1.jpg`, aspectRatio: "1:1" },
 				post_url: `${NEXT_PUBLIC_URL}/api/images?slide=0`,
-				aspect_ratio: "1:1",
 			})
 		);
 	}
@@ -93,9 +91,12 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 				{
 					label: "Successfully claimed!",
 				},
+				{ label: "Check the transaction hash" },
 			],
-			image: `${NEXT_PUBLIC_URL}/nfts/${tokenId}.jpg`,
-			aspect_ratio: "1:1",
+			image: {
+				src: `${NEXT_PUBLIC_URL}/nfts/${tokenId}.jpg`,
+				aspectRatio: "1:1",
+			},
 		})
 	);
 }
