@@ -45,11 +45,6 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 						action: "link",
 						target: `https://sepolia.etherscan.io/tx/${already_minted.tx}`,
 					},
-					{
-						label: "Mint",
-						action: "mint",
-						target: `eip155:11155111:0xc61D94302C0BD19b944c80162D84B8C19a4673d4:${already_minted.tokenId}`,
-					},
 				],
 				image: { src: `${NEXT_PUBLIC_URL}/nfts/1.jpg`, aspectRatio: "1:1" },
 			})
@@ -84,11 +79,6 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 					label: "Successfully claimed!",
 					action: "link",
 					target: `https://sepolia.etherscan.io/tx/${tx}`,
-				},
-				{
-					label: "Mint",
-					action: "mint",
-					target: `eip155:11155111:0xc61D94302C0BD19b944c80162D84B8C19a4673d4:${tokenId}`,
 				},
 			],
 			image: {
