@@ -1,6 +1,7 @@
 import { privateKeyToAccount } from "viem/accounts";
 import { sepolia } from "viem/chains";
 import Gorillas from "./abi/Gorillas.json";
+require("dotenv").config();
 
 export const NEXT_PUBLIC_URL = "https://onframe-one-day-gorilla.vercel.app";
 export const WALLET_KEY = process.env.WALLET_KEY;
