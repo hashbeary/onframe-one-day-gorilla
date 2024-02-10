@@ -32,7 +32,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 	const accountAddress: string | undefined =
 		message.interactor.verified_accounts[0];
 
-	const already_minted = await kv.get(accountAddress);
+	const already_minted = await kv.get("account:" + accountAddress);
 
 	if (already_minted || !accountAddress) {
 		return new NextResponse(
@@ -41,7 +41,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 					{
 						label: already_minted
 							? "You have already minted it!"
-							: "You have to connect a wallet",
+							: "You have to connect your wallet",
 					},
 				],
 				image: `${NEXT_PUBLIC_URL}/error.png`,
@@ -52,7 +52,21 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
 	const tokenId = Math.round(Math.random() * 5 + 1);
 
-	await kv.set(accountAddress, true);
+	const storage_success = await kv.set("account:" + accountAddress, true);
+
+	if (!storage_success) {
+		return new NextResponse(
+			getFrameHtmlResponse({
+				buttons: [
+					{
+						label: "Something went wrong. But you may retry!",
+					},
+				],
+				image: `${NEXT_PUBLIC_URL}/error.png`,
+				post_url: `${NEXT_PUBLIC_URL}/api/mint`,
+			})
+		);
+	}
 
 	const tx_success = await mint(accountAddress, tokenId);
 
