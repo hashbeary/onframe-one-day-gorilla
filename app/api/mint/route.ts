@@ -40,37 +40,22 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 				buttons: [
 					{
 						label: "You have already minted it!",
+						action: "post_redirect",
 					},
 				],
-
 				image: { src: `${NEXT_PUBLIC_URL}/nfts/1.jpg`, aspectRatio: "1:1" },
-				post_url: `${NEXT_PUBLIC_URL}/api/images?slide=0`,
+				postUrl: `https://sepolia.etherscan.io/tx/${already_minted}`,
 			})
 		);
 	}
 
 	const tokenId = Math.round(Math.random() * 5 + 1);
 
-	const storage_success = await kv.set("account:" + accountAddress, true);
-
-	if (!storage_success) {
-		return new NextResponse(
-			getFrameHtmlResponse({
-				buttons: [
-					{
-						label: "Something went wrong. But you may retry!",
-					},
-				],
-				image: `${NEXT_PUBLIC_URL}/error.jpg`,
-				post_url: `${NEXT_PUBLIC_URL}/api/mint`,
-			})
-		);
-	}
-
 	const tx_success = await mint(accountAddress, tokenId);
+	await kv.set("account:" + accountAddress, tx_success);
 
 	if (!tx_success) {
-		await kv.del(accountAddress);
+		await kv.del("account:" + accountAddress);
 
 		return new NextResponse(
 			getFrameHtmlResponse({
@@ -87,16 +72,12 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
 	return new NextResponse(
 		getFrameHtmlResponse({
-			buttons: [
-				{
-					label: "Successfully claimed!",
-				},
-				{ label: "Check the transaction hash" },
-			],
+			buttons: [{ label: "Successfully claimed!", action: "post_redirect" }],
 			image: {
 				src: `${NEXT_PUBLIC_URL}/nfts/${tokenId}.jpg`,
 				aspectRatio: "1:1",
 			},
+			postUrl: `https://sepolia.etherscan.io/tx/${tx_success}`,
 		})
 	);
 }
