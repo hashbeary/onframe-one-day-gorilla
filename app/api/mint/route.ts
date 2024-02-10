@@ -40,11 +40,11 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 				buttons: [
 					{
 						label: "You have already minted it!",
-						action: "post_redirect",
+						action: "link",
+						target: `https://sepolia.etherscan.io/tx/${already_minted}`,
 					},
 				],
 				image: { src: `${NEXT_PUBLIC_URL}/nfts/1.jpg`, aspectRatio: "1:1" },
-				postUrl: `https://sepolia.etherscan.io/tx/${already_minted}`,
 			})
 		);
 	}
@@ -72,12 +72,17 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
 	return new NextResponse(
 		getFrameHtmlResponse({
-			buttons: [{ label: "Successfully claimed!", action: "post_redirect" }],
+			buttons: [
+				{
+					label: "Successfully claimed!",
+					action: "link",
+					target: `https://sepolia.etherscan.io/tx/${tx_success}`,
+				},
+			],
 			image: {
 				src: `${NEXT_PUBLIC_URL}/nfts/${tokenId}.jpg`,
 				aspectRatio: "1:1",
 			},
-			postUrl: `https://sepolia.etherscan.io/tx/${tx_success}`,
 		})
 	);
 }
