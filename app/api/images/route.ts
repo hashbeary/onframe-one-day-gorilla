@@ -4,7 +4,7 @@ import {
 	getFrameMessage,
 } from "@coinbase/onchainkit";
 import { NextRequest, NextResponse } from "next/server";
-import { NEXT_PUBLIC_URL } from "../config";
+import { NEXT_PUBLIC_URL } from "../../config";
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
 	const body: FrameRequest = await req.json();
@@ -26,7 +26,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 					},
 				],
 				image: `${NEXT_PUBLIC_URL}/error.png`,
-				post_url: `${NEXT_PUBLIC_URL}/api?slide=` + (slideNum - 1),
+				post_url: `${NEXT_PUBLIC_URL}/api/images?slide=` + (slideNum - 1),
 			})
 		);
 	}
@@ -35,26 +35,21 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
 	let next: number;
 
-	if (slideNum == 10 && message?.button == 2) {
-		return new NextResponse(
-			// getFrameHtmlResponse({
-			// 	buttons: [
-			// 		{
-			// 			label: "Mint",
-			// 			action: "mint" as "post" | "post_redirect" | undefined,
-			// 			target:
-			// 		},
-			// 	],
-			// 	image: `${NEXT_PUBLIC_URL}/${next}.png`,
-			// 	post_url: `${NEXT_PUBLIC_URL}/api?slide=` + next,
-			// })
-			`<!DOCTYPE html><html><head><meta property="fc:frame:button:1" content="Mint" />
-			<meta property="fc:frame:button:1:action" content="mint" />
-			<meta property="fc:frame:button:1:target" content="eip155:11155111:0x2026E58bFdaF3eAd9E9a469F479DB0f8F13EFD44<:token_id>"><meta property="fc:frame:image" content=${NEXT_PUBLIC_URL}/error.png" /><meta property="fc:frame" content="vNext" /></head></html>`
-		);
+	if (slideNum == 9 && message?.button == 2) {
+		getFrameHtmlResponse({
+			buttons: [
+				{
+					label: "Claim the NFT",
+				},
+			],
+			image: `${NEXT_PUBLIC_URL}/10.png`,
+			post_url: `${NEXT_PUBLIC_URL}/api/mint`,
+		});
 	}
 	if (slideNum == 0 && message?.button == 1) next = slideNum;
 	else next = message?.button == 2 ? slideNum + 1 : slideNum - 1;
+
+	// TODO: Resize images
 
 	return new NextResponse(
 		getFrameHtmlResponse({
@@ -67,7 +62,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 				},
 			],
 			image: `${NEXT_PUBLIC_URL}/${next}.png`,
-			post_url: `${NEXT_PUBLIC_URL}/api?slide=` + next,
+			post_url: `${NEXT_PUBLIC_URL}/api/images?slide=` + next,
 		})
 	);
 }

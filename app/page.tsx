@@ -12,7 +12,7 @@ const frameMetadata = getFrameMetadata({
 		},
 	],
 	image: `${NEXT_PUBLIC_URL}/0.png`,
-	post_url: `${NEXT_PUBLIC_URL}/api`,
+	post_url: `${NEXT_PUBLIC_URL}/api/images`,
 });
 
 export const metadata: Metadata = {
