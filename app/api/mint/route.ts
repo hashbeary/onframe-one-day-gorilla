@@ -44,8 +44,9 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 							: "You have to connect your wallet",
 					},
 				],
-				image: `${NEXT_PUBLIC_URL}/error.jpg`,
+				image: `${NEXT_PUBLIC_URL}/nfts/1.jpg`,
 				post_url: `${NEXT_PUBLIC_URL}/api/images?slide=0`,
+				aspect_ratio: "1:1",
 			})
 		);
 	}
@@ -93,8 +94,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 					label: "Successfully claimed!",
 				},
 			],
-
 			image: `${NEXT_PUBLIC_URL}/nfts/${tokenId}.jpg`,
+			aspect_ratio: "1:1",
 		})
 	);
 }
