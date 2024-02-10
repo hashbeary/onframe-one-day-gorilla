@@ -11,7 +11,6 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 	const slideNum: number = Number(
 		new URLSearchParams(new URL(req.url).search).get("slide")
 	);
-	let accountAddress: string = "";
 
 	const { isValid, message } = await getFrameMessage(body, {
 		neynarApiKey: "NEYNAR_ONCHAIN_KIT",
@@ -31,21 +30,22 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 		);
 	}
 
-	accountAddress = message.interactor.verified_accounts[0];
-
 	let next: number;
 
-	if (slideNum == 9 && message?.button == 2) {
-		getFrameHtmlResponse({
-			buttons: [
-				{
-					label: "Claim the NFT",
-				},
-			],
-			image: `${NEXT_PUBLIC_URL}/10.png`,
-			post_url: `${NEXT_PUBLIC_URL}/api/mint`,
-		});
+	if (slideNum == 10 && message?.button == 2) {
+		return new NextResponse(
+			getFrameHtmlResponse({
+				buttons: [
+					{
+						label: "Claim the NFT",
+					},
+				],
+				image: `${NEXT_PUBLIC_URL}/10.png`,
+				post_url: `${NEXT_PUBLIC_URL}/api/mint`,
+			})
+		);
 	}
+
 	if (slideNum == 0 && message?.button == 1) next = slideNum;
 	else next = message?.button == 2 ? slideNum + 1 : slideNum - 1;
 
