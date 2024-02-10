@@ -94,7 +94,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 				},
 			],
 
-			image: `${NEXT_PUBLIC_URL}/nfts/${tokenId}.png`,
+			image: `${NEXT_PUBLIC_URL}/nfts/${tokenId}.jpg`,
 		})
 	);
 }
