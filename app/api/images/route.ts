@@ -24,7 +24,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 						label: "Something went wrong. But you may retry!",
 					},
 				],
-				image: `${NEXT_PUBLIC_URL}/error.png`,
+				image: `${NEXT_PUBLIC_URL}/error.jpg`,
 				post_url: `${NEXT_PUBLIC_URL}/api/images?slide=` + (slideNum - 1),
 			})
 		);
@@ -32,15 +32,15 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
 	let next: number;
 
-	if (slideNum == 10 && message?.button == 2) {
+	if (slideNum == 9 && message?.button == 2) {
 		return new NextResponse(
 			getFrameHtmlResponse({
 				buttons: [
 					{
-						label: "Claim the NFT",
+						label: "🍌 Claim the NFT 🍌",
 					},
 				],
-				image: `${NEXT_PUBLIC_URL}/10.png`,
+				image: `${NEXT_PUBLIC_URL}/10.jpg`,
 				post_url: `${NEXT_PUBLIC_URL}/api/mint`,
 			})
 		);
@@ -61,7 +61,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 					label: "➡️",
 				},
 			],
-			image: `${NEXT_PUBLIC_URL}/${next}.png`,
+			image: `${NEXT_PUBLIC_URL}/${next}.jpg`,
 			post_url: `${NEXT_PUBLIC_URL}/api/images?slide=` + next,
 		})
 	);

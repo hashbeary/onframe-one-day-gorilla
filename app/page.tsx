@@ -11,7 +11,7 @@ const frameMetadata = getFrameMetadata({
 			label: "➡️",
 		},
 	],
-	image: `${NEXT_PUBLIC_URL}/0.png`,
+	image: `${NEXT_PUBLIC_URL}/0.jpg`,
 	post_url: `${NEXT_PUBLIC_URL}/api/images`,
 });
 
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 	openGraph: {
 		title: "Onframe This Gorilla Will Die In 1 Day",
 		description: "Onframe This Gorilla Will Die In 1 Day",
-		images: [`${NEXT_PUBLIC_URL}/0.png`],
+		images: [`${NEXT_PUBLIC_URL}/0.jpg`],
 	},
 	other: {
 		...frameMetadata,

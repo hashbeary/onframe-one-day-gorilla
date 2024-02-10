@@ -23,7 +23,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 						label: "Something went wrong. But you may retry!",
 					},
 				],
-				image: `${NEXT_PUBLIC_URL}/error.png`,
+				image: `${NEXT_PUBLIC_URL}/error.jpg`,
 				post_url: `${NEXT_PUBLIC_URL}/api/mint`,
 			})
 		);
@@ -44,7 +44,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 							: "You have to connect your wallet",
 					},
 				],
-				image: `${NEXT_PUBLIC_URL}/error.png`,
+				image: `${NEXT_PUBLIC_URL}/error.jpg`,
 				post_url: `${NEXT_PUBLIC_URL}/api/images?slide=0`,
 			})
 		);
@@ -62,7 +62,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 						label: "Something went wrong. But you may retry!",
 					},
 				],
-				image: `${NEXT_PUBLIC_URL}/error.png`,
+				image: `${NEXT_PUBLIC_URL}/error.jpg`,
 				post_url: `${NEXT_PUBLIC_URL}/api/mint`,
 			})
 		);
@@ -80,7 +80,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 						label: "Something went wrong. But you may retry!",
 					},
 				],
-				image: `${NEXT_PUBLIC_URL}/error.png`,
+				image: `${NEXT_PUBLIC_URL}/error.jpg`,
 				post_url: `${NEXT_PUBLIC_URL}/api/mint`,
 			})
 		);
