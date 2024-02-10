@@ -32,7 +32,9 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 	const accountAddress: string | undefined =
 		message.interactor.verified_accounts[0];
 
-	const already_minted = await kv.get("account:" + accountAddress);
+	const already_minted: { tx: string; tokenId: number } | null = await kv.get(
+		"account:" + accountAddress
+	);
 
 	if (already_minted) {
 		return new NextResponse(
@@ -41,7 +43,12 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 					{
 						label: "You have already minted it!",
 						action: "link",
-						target: `https://sepolia.etherscan.io/tx/${already_minted}`,
+						target: `https://sepolia.etherscan.io/tx/${already_minted.tx}`,
+					},
+					{
+						label: "Mint",
+						action: "mint",
+						target: `eip155:11155111:0xc61D94302C0BD19b944c80162D84B8C19a4673d4:${already_minted.tokenId}`,
 					},
 				],
 				image: { src: `${NEXT_PUBLIC_URL}/nfts/1.jpg`, aspectRatio: "1:1" },
@@ -50,11 +57,11 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 	}
 
 	const tokenId = Math.round(Math.random() * 5 + 1);
+	const tx = await mint(accountAddress, tokenId);
 
-	const tx_success = await mint(accountAddress, tokenId);
-	await kv.set("account:" + accountAddress, tx_success);
+	await kv.set("account:" + accountAddress, { tx, tokenId });
 
-	if (!tx_success) {
+	if (!tx) {
 		await kv.del("account:" + accountAddress);
 
 		return new NextResponse(
@@ -76,7 +83,12 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 				{
 					label: "Successfully claimed!",
 					action: "link",
-					target: `https://sepolia.etherscan.io/tx/${tx_success}`,
+					target: `https://sepolia.etherscan.io/tx/${tx}`,
+				},
+				{
+					label: "Mint",
+					action: "mint",
+					target: `eip155:11155111:0xc61D94302C0BD19b944c80162D84B8C19a4673d4:${tokenId}`,
 				},
 			],
 			image: {
