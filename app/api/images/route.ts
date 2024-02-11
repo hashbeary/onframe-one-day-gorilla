@@ -49,8 +49,6 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 	if (slideNum == 0 && message?.button == 1) next = slideNum;
 	else next = message?.button == 2 ? slideNum + 1 : slideNum - 1;
 
-	// TODO: Resize images
-
 	return new NextResponse(
 		getFrameHtmlResponse({
 			buttons: [

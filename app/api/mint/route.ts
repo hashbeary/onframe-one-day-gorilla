@@ -43,7 +43,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 					{
 						label: "You have already minted it!",
 						action: "link",
-						target: `https://sepolia.etherscan.io/tx/${already_minted.tx}`,
+						target: `https://basescan.org/tx/${already_minted.tx}`,
 					},
 				],
 				image: { src: `${NEXT_PUBLIC_URL}/nfts/1.jpg`, aspectRatio: "1:1" },
@@ -78,7 +78,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 				{
 					label: "Successfully claimed!",
 					action: "link",
-					target: `https://sepolia.etherscan.io/tx/${tx}`,
+					target: `https://basescan.org/tx/${tx}`,
 				},
 			],
 			image: {
