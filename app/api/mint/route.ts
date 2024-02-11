@@ -47,7 +47,10 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 						target: `https://basescan.org/tx/${already_minted.tx}`,
 					},
 				],
-				image: { src: `${NEXT_PUBLIC_URL}/nfts/1.jpg`, aspectRatio: "1:1" },
+				image: {
+					src: `${NEXT_PUBLIC_URL}/nfts/${already_minted.tokenId}.gif`,
+					aspectRatio: "1:1",
+				},
 			})
 		);
 	}
