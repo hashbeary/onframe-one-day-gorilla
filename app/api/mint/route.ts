@@ -6,6 +6,7 @@ import {
 } from "@coinbase/onchainkit";
 import { kv } from "@vercel/kv";
 import { NextRequest, NextResponse } from "next/server";
+import { Hash } from "viem";
 import { NEXT_PUBLIC_URL } from "../../config";
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
@@ -52,13 +53,14 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 	}
 
 	const tokenId = Math.round(Math.random() * 5 + 1);
-	const tx = await mint(accountAddress, tokenId);
+	let tx: Hash;
 
-	await kv.set("account:" + accountAddress, { tx, tokenId });
-
-	if (!tx) {
-		await kv.del("account:" + accountAddress);
-
+	try {
+		tx = await mint(accountAddress, tokenId);
+	} catch (error) {
+		await new Promise(resolve =>
+			setTimeout(resolve, Math.round(Math.random() * 5000 + 2000))
+		);
 		return new NextResponse(
 			getFrameHtmlResponse({
 				buttons: [
@@ -71,6 +73,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 			})
 		);
 	}
+
+	await kv.set("account:" + accountAddress, { tx, tokenId });
 
 	return new NextResponse(
 		getFrameHtmlResponse({
