@@ -89,7 +89,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 				},
 			],
 			image: {
-				src: `${NEXT_PUBLIC_URL}/nfts/${tokenId}.jpg`,
+				src: `${NEXT_PUBLIC_URL}/nfts/${tokenId}.gif`,
 				aspectRatio: "1:1",
 			},
 		})
