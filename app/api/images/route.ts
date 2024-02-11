@@ -11,6 +11,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 	const slideNum: number = Number(
 		new URLSearchParams(new URL(req.url).search).get("slide")
 	);
+	const gifs = new Set([3, 4, 8, 10]);
 
 	const { isValid, message } = await getFrameMessage(body, {
 		neynarApiKey: "NEYNAR_ONCHAIN_KIT",
@@ -30,7 +31,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 		);
 	}
 
-	let next: number;
+	let nextSlide: number;
 
 	if (slideNum == 9 && message?.button == 2) {
 		return new NextResponse(
@@ -40,14 +41,14 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 						label: "🍌 Claim the NFT 🍌",
 					},
 				],
-				image: `${NEXT_PUBLIC_URL}/10.jpg`,
+				image: `${NEXT_PUBLIC_URL}/10.gif`,
 				post_url: `${NEXT_PUBLIC_URL}/api/mint`,
 			})
 		);
 	}
 
-	if (slideNum == 0 && message?.button == 1) next = slideNum;
-	else next = message?.button == 2 ? slideNum + 1 : slideNum - 1;
+	if (slideNum == 0 && message?.button == 1) nextSlide = slideNum;
+	else nextSlide = message?.button == 2 ? slideNum + 1 : slideNum - 1;
 
 	return new NextResponse(
 		getFrameHtmlResponse({
@@ -59,8 +60,10 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 					label: "➡️",
 				},
 			],
-			image: `${NEXT_PUBLIC_URL}/${next}.jpg`,
-			post_url: `${NEXT_PUBLIC_URL}/api/images?slide=` + next,
+			image: `${NEXT_PUBLIC_URL}/${nextSlide}.${
+				gifs.has(nextSlide) ? "gif" : "jpg"
+			}`,
+			post_url: `${NEXT_PUBLIC_URL}/api/images?slide=` + nextSlide,
 		})
 	);
 }
