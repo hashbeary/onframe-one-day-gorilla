@@ -46,6 +46,11 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 						action: "link",
 						target: `https://basescan.org/tx/${already_minted.tx}`,
 					},
+					{
+						label: "Collection",
+						action: "link",
+						target: `https://opensea.io/collection/one-day-gorillas`,
+					},
 				],
 				image: {
 					src: `${NEXT_PUBLIC_URL}/nfts/${already_minted.tokenId}.gif`,
@@ -86,6 +91,11 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 					label: "Successfully claimed!",
 					action: "link",
 					target: `https://basescan.org/tx/${tx}`,
+				},
+				{
+					label: "Collection",
+					action: "link",
+					target: `https://opensea.io/collection/one-day-gorillas`,
 				},
 			],
 			image: {
