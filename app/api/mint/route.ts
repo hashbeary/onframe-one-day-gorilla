@@ -7,7 +7,12 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 		getFrameHtmlResponse({
 			buttons: [
 				{
-					label: "The mint is over!",
+					label: "Mint is over!",
+				},
+				{
+					label: "Check collection",
+					action: "link",
+					target: `https://opensea.io/collection/one-day-gorillas`,
 				},
 			],
 			image: `${NEXT_PUBLIC_URL}/end.png`,
