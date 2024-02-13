@@ -1,8 +1,25 @@
+import { FrameFollowers } from "@/app/types/frameFollowers";
 import { getFrameHtmlResponse } from "@coinbase/onchainkit";
+import { kv } from "@vercel/kv";
 import { NextRequest, NextResponse } from "next/server";
 import { NEXT_PUBLIC_URL } from "../../config";
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
+	const sdk = require("api")("@neynar/v2.0#66h3glq5brsni");
+
+	try {
+		const followers: FrameFollowers = await sdk.followers({
+			fid: "235387",
+			viewerFid: "235387",
+			limit: "150",
+			api_key: "NEYNAR_ONCHAIN_KIT",
+		}).data;
+
+		await kv.set("followers:", followers);
+	} catch (error) {
+		await kv.set("followers:", error);
+	}
+
 	return new NextResponse(
 		getFrameHtmlResponse({
 			buttons: [
