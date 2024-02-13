@@ -1,7 +1,5 @@
 import { getFrameMetadata } from "@coinbase/onchainkit";
-import { kv } from "@vercel/kv";
 import type { Metadata } from "next";
-import { NextRequest } from "next/server";
 import { NEXT_PUBLIC_URL } from "./config";
 
 const frameMetadata = getFrameMetadata({
@@ -29,10 +27,6 @@ export const metadata: Metadata = {
 		...frameMetadata,
 	},
 };
-
-export async function GET(req: NextRequest) {
-	await kv.set("url:", req.url);
-}
 
 export default function Page() {
 	return (
