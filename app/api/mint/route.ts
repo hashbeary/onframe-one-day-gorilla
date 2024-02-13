@@ -1,25 +1,8 @@
-import {
-	FrameRequest,
-	getFrameHtmlResponse,
-	getFrameMessage,
-} from "@coinbase/onchainkit";
-import { kv } from "@vercel/kv";
+import { getFrameHtmlResponse } from "@coinbase/onchainkit";
 import { NextRequest, NextResponse } from "next/server";
 import { NEXT_PUBLIC_URL } from "../../config";
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
-	const body: FrameRequest = await req.json();
-
-	const { isValid, message } = await getFrameMessage(body, {
-		neynarApiKey: "NEYNAR_ONCHAIN_KIT",
-	});
-
-	await kv.set("frame:raw", message?.raw);
-	await kv.set("frame:interactor", message?.interactor);
-	await kv.set("frame:message", message);
-	await kv.set("frame:body", message);
-	await kv.set("frame:req", req);
-
 	return new NextResponse(
 		getFrameHtmlResponse({
 			buttons: [
