@@ -29,8 +29,6 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 		await kv.set("followers:", error);
 	}
 
-	await kv.set("url:", req.url);
-
 	return new NextResponse(
 		getFrameHtmlResponse({
 			buttons: [
