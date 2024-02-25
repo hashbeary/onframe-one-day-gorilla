@@ -64,7 +64,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 			buttons: [
 				{
 					label: "🦍 🍌 🔵",
-					action: "post_redirect",
+					action: "link",
 					target: `https://zora.co/collect/zora:0x7e35caf6abc257b5be0fbe7ef085807fd282c6ef/${tokenId}`,
 				},
 			],
@@ -72,6 +72,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 				src: `${NEXT_PUBLIC_URL}/nfts/${tokenId}.gif`,
 				aspectRatio: "1:1",
 			},
+			postUrl: `https://zora.co/collect/zora:0x7e35caf6abc257b5be0fbe7ef085807fd282c6ef/${tokenId}`,
 		})
 	);
 }
