@@ -63,7 +63,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 		getFrameHtmlResponse({
 			buttons: [
 				{
-					label: "🦍 🍌 🔵",
+					label: "Mint",
 					action: "mint",
 					target: `eip155:7777777:0xe2af22fcd04e01ec88421cc8dba1e27e37f749af:${tokenId}`,
 				},
