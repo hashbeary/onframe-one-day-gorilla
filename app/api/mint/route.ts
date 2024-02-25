@@ -68,7 +68,10 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 					target: `eip155:7777777:0x7e35caf6abc257b5be0fbe7ef085807fd282c6ef:${tokenId}`,
 				},
 			],
-			image: `${NEXT_PUBLIC_URL}/nfts/${tokenId}.gif`,
+			image: {
+				src: `${NEXT_PUBLIC_URL}/nfts/${tokenId}.gif`,
+				aspectRatio: "1:1",
+			},
 		})
 	);
 }
