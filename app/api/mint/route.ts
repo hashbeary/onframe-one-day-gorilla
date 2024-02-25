@@ -43,19 +43,19 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 		);
 	}
 
-	if (!message.liked || !message.recasted) {
-		return new NextResponse(
-			getFrameHtmlResponse({
-				buttons: [
-					{
-						label: "❤️ 🔄 🦍 🍌 🔵",
-					},
-				],
-				image: `${NEXT_PUBLIC_URL}/10.gif`,
-				post_url: `${NEXT_PUBLIC_URL}/api/mint`,
-			})
-		);
-	}
+	// if (!message.liked || !message.recasted) {
+	// 	return new NextResponse(
+	// 		getFrameHtmlResponse({
+	// 			buttons: [
+	// 				{
+	// 					label: "❤️ 🔄 🦍 🍌 🔵",
+	// 				},
+	// 			],
+	// 			image: `${NEXT_PUBLIC_URL}/10.gif`,
+	// 			post_url: `${NEXT_PUBLIC_URL}/api/mint`,
+	// 		})
+	// 	);
+	// }
 
 	const tokenId = Math.round(Math.random() * 5 + 1);
 
