@@ -72,6 +72,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 				src: `${NEXT_PUBLIC_URL}/nfts/${tokenId}.gif`,
 				aspectRatio: "1:1",
 			},
+			post_url: `https://zora.co/collect/zora:0xe2af22fcd04e01ec88421cc8dba1e27e37f749af/${tokenId}`,
 		})
 	);
 }
