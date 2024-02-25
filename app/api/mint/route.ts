@@ -43,13 +43,27 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 		);
 	}
 
+	if (!message.liked || !message.recasted) {
+		return new NextResponse(
+			getFrameHtmlResponse({
+				buttons: [
+					{
+						label: "🍌 Please like and recast 🍌",
+					},
+				],
+				image: `${NEXT_PUBLIC_URL}/10.gif`,
+				post_url: `${NEXT_PUBLIC_URL}/api/mint`,
+			})
+		);
+	}
+
 	const tokenId = Math.round(Math.random() * 5 + 1);
 
 	return new NextResponse(
 		getFrameHtmlResponse({
 			buttons: [
 				{
-					label: "Mint",
+					label: "Mint 🦍 🍌 🔵",
 					action: "mint",
 					target: `eip155:7777777:0xe2af22fcd04e01ec88421cc8dba1e27e37f749af:${tokenId}`,
 				},
