@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 	},
 };
 
-export default function Page() {
+export default async function Page() {
 	return (
 		<>
 			<h1>Onframe This Gorilla Will Die In 1 Day</h1>

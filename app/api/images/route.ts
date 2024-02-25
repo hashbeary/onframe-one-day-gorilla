@@ -38,7 +38,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 			getFrameHtmlResponse({
 				buttons: [
 					{
-						label: "🍌 Claim the NFT 🍌",
+						label: "❤️ 🔄",
 					},
 				],
 				image: `${NEXT_PUBLIC_URL}/10.gif`,
