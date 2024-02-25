@@ -59,22 +59,26 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
 	const tokenId = Math.round(Math.random() * 5 + 1);
 
-	return new NextResponse(
-		getFrameHtmlResponse({
-			buttons: [
-				{
-					label: "Mint",
-					action: "mint",
-					target: `eip155:7777777:0x7e35caf6abc257b5be0fbe7ef085807fd282c6ef:${tokenId}`,
-				},
-			],
-			image: {
-				src: `${NEXT_PUBLIC_URL}/nfts/${tokenId}.gif`,
-				aspectRatio: "1:1",
-			},
-			post_url: `https://zora.co/collect/zora:0x7e35caf6abc257b5be0fbe7ef085807fd282c6ef/${tokenId}`,
-		})
+	return NextResponse.redirect(
+		`https://zora.co/collect/zora:0x7e35caf6abc257b5be0fbe7ef085807fd282c6ef/${tokenId}`
 	);
+
+	// return new NextResponse(
+	// 	getFrameHtmlResponse({
+	// 		buttons: [
+	// 			{
+	// 				label: "Mint",
+	// 				action: "mint",
+	// 				target: `eip155:7777777:0x7e35caf6abc257b5be0fbe7ef085807fd282c6ef:${tokenId}`,
+	// 			},
+	// 		],
+	// 		image: {
+	// 			src: `${NEXT_PUBLIC_URL}/nfts/${tokenId}.gif`,
+	// 			aspectRatio: "1:1",
+	// 		},
+	// 		post_url: `https://zora.co/collect/zora:0x7e35caf6abc257b5be0fbe7ef085807fd282c6ef/${tokenId}`,
+	// 	})
+	// );
 }
 
 export async function POST(req: NextRequest): Promise<Response> {
